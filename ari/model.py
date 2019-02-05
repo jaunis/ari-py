@@ -368,7 +368,10 @@ def promote(client, resp, operation_json):
     if resp.status_code == requests.codes.no_content:
         return None
     log.info("No mapping for %s; returning JSON" % response_class)
-    return resp.json()
+    try:
+        return resp.json()
+    except ValueError:
+        return None
 
 
 CLASS_MAP = {
